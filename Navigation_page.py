@@ -13,7 +13,7 @@ from Insert_On_Datbase import insert_in_Local
 app = wx.App()
 
 def ChromeDriver():
-    browser = webdriver.Chrome(executable_path=str(f"F:\\chromedriver.exe"))
+    browser = webdriver.Chrome(executable_path=str(f"C:\\chromedriver.exe"))
     browser.get("https://www.indumil.gov.co/INDUMIL.Consulta.Procesos/Inicio.aspx")
     browser.maximize_window()
     time.sleep(5)
