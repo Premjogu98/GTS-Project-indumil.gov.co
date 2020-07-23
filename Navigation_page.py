@@ -9,6 +9,7 @@ import string
 import html
 import re
 from Insert_On_Datbase import insert_in_Local
+import dateparser
 
 app = wx.App()
 
@@ -49,7 +50,7 @@ def ChromeDriver():
                         time.sleep(2)
                     else:
                         print('Publish Date Dead')
-                        wx.MessageBox(f'Total: {str(Global_var.Total)}\nDeadline Not given: {Global_var.deadline_Not_given}\nduplicate: {Global_var.duplicate}\ninserted: {Global_var.inserted}\nexpired: {Global_var.expired}\nQC Tenders: {Global_var.QC_Tenders}','hankintailmoitukset.fi', wx.OK | wx.ICON_INFORMATION)
+                        wx.MessageBox(f'Total: {str(Global_var.Total)}\nDeadline Not given: {Global_var.deadline_Not_given}\nduplicate: {Global_var.duplicate}\ninserted: {Global_var.inserted}\nexpired: {Global_var.expired}\nQC Tenders: {Global_var.QC_Tenders}','indumil.gov.co', wx.OK | wx.ICON_INFORMATION)
                         browser.close()
                         sys.exit()
                 tr_count += 1
@@ -137,7 +138,7 @@ def scrap_data(browser):
             
             for Deadline in browser.find_elements_by_xpath(f'//*[@id="ctl00_ContentPlaceHolder1_procesoAdquisicionFormView_Label11"]'):
                 Deadline = Deadline.get_attribute('innerText').replace('p.','').replace('a.','').replace('m.','').strip()
-                datetime_object = datetime.strptime(Deadline, '%d-%b-%Y %H:%M')
+                datetime_object = dateparser.parse(str(Deadline))
                 Deadline = datetime_object.strftime("%Y-%m-%d")
                 SegField[24] = Deadline.strip()
                 break
