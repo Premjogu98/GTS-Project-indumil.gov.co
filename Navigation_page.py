@@ -18,6 +18,16 @@ def ChromeDriver():
     browser.get("https://www.indumil.gov.co/INDUMIL.Consulta.Procesos/Inicio.aspx")
     browser.maximize_window()
     time.sleep(5)
+    clicked = 1
+    while True:
+        if clicked != 3:
+            for opening_data in browser.find_elements_by_xpath('//*[@id="ctl00_ContentPlaceHolder1_procesosGridView"]/tbody/tr[2]/th[5]/a'):
+                opening_data.click()
+                time.sleep(4)
+                break
+            clicked += 1
+        else:
+            break
     loop = True
     page_count = 2
     while loop == True:
