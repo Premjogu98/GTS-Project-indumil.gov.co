@@ -14,7 +14,7 @@ import dateparser
 app = wx.App()
 
 def ChromeDriver():
-    browser = webdriver.Chrome(executable_path=str(f"C:\\chromedriver.exe"))
+    browser = webdriver.Chrome(executable_path=str(f"F:\\chromedriver.exe"))
     browser.get("https://www.indumil.gov.co/INDUMIL.Consulta.Procesos/Inicio.aspx")
     browser.maximize_window()
     time.sleep(5)
@@ -39,8 +39,7 @@ def ChromeDriver():
                     for opening_date in browser.find_elements_by_xpath(f'//*[@id="ctl00_ContentPlaceHolder1_procesosGridView"]/tbody/tr[{str(tr_count)}]/td[5]'):
                         opening_date = opening_date.get_attribute('innerText').replace('p.','').replace('a.','').replace('m.','').strip()
                         break
-
-                    datetime_object = datetime.strptime(opening_date, '%d-%b-%Y %H:%M')
+                    datetime_object = dateparser.parse(str(opening_date))
                     publish_date = datetime_object.strftime("%d-%m-%Y")
 
                     datetime_object_pub = datetime.strptime(publish_date, '%d-%m-%Y')
